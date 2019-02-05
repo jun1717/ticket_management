@@ -1,4 +1,4 @@
-const MAX_RECENT_UPDATED_TODOS = 3;
+const MAX_RECENT_UPDATED_TODOS = 7;
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
@@ -52,7 +52,6 @@ exports.limitRecentUpdatedTodos = functions.database.ref('/recentUpdatedTodos/{t
       const updates = {};
       todosSnapshot.forEach((child) => {
         if (++childCount <= todosSnapshot.numChildren() - MAX_RECENT_UPDATED_TODOS) {  // #2
-          console.log('aaaa');
           updates[child.key] = null;  // #3
         }
       });

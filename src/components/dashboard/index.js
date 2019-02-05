@@ -1,7 +1,7 @@
 import React from 'react'
 import RecentUpdatedTodos from './recentUpdatedTodos/'
-import PropTypes from 'prop-types'  // 追加
-import { withStyles } from '@material-ui/core/styles'  // 追加
+import propTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
@@ -22,8 +22,8 @@ const Dashboard = ({ classes }) => (
   </div>
 )
 
-Dashboard.PropTypes = {
-  classes: PropTypes.object.isRequired,
+Dashboard.propTypes = {
+  classes: propTypes.object.isRequired,
 }
 
 export default withStyles(styles)(Dashboard)
