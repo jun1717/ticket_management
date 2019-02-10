@@ -8,6 +8,7 @@ import TodoComponent from './todos/'
 import NoMatch from './NoMatch'
 import Header from './header/'
 import Notice from './Notice'
+import AddTodoForm from './AddTodoForm'
 
 const styles = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -22,6 +23,7 @@ const App = ({ classes }) => (
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/users/:uid/todos" component={TodoComponent} />
+        <Route exact path="/addtodoform" component={AddTodoForm} />
         <Route component={NoMatch} />
       </Switch>
       <Notice />

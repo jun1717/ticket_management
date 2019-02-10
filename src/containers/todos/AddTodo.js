@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { addTodo } from '../../actions/todoActions'
@@ -31,6 +32,9 @@ class AddTodo extends React.Component {
             タスクを追加
           </Button>
         </form>
+        <Button variant="contained" color="secondary" component={Link} to="/addtodoform">
+          タスクを追加
+        </Button>
       </div>
     )
   }
