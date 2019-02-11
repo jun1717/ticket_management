@@ -23,7 +23,7 @@ const App = ({ classes }) => (
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/users/:uid/todos" component={TodoComponent} />
-        <Route exact path="/addtodoform" component={AddTodoForm} />
+        <Route exact path="/users/:uid/addtodoform" component={AddTodoForm} />
         <Route component={NoMatch} />
       </Switch>
       <Notice />

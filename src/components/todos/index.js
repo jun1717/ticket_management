@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 import FilterNav from './FilterNav'
 import Title from './Title'
-import AddTodo from '../../containers/todos/AddTodo'
 import VisibleTodoList from '../../containers/todos/VisibleTodoList'
 import { locationChangeOnTodos } from '../../actions/todoActions'
 
@@ -44,8 +45,12 @@ class TodoComponent extends React.Component {
         <div className={classes.todoListRoot}>
           <Paper className={classes.todoListContent}>
             <Title isOwnTodos={isOwnTodos} uid={uid} />
-            {isOwnTodos && <AddTodo uid={uid} />}
             <VisibleTodoList uid={uid} isOwnTodos={isOwnTodos} />
+            {isOwnTodos &&
+              <Button variant="contained" color="secondary" component={Link} to={`/users/${uid}/addtodoform`}>
+                タスクを追加
+              </Button>
+            }
             <FilterNav />
           </Paper>
         </div>
@@ -73,11 +78,6 @@ const mapStateToProps = ({ firebase: { auth } }, { match }) => ({
 const mapDispatchToProps = (dispatch) => ({
   locationChange: () => dispatch(locationChangeOnTodos())
 })
-
-TodoComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoComponent)
 
 export default compose(
   withStyles(styles),
