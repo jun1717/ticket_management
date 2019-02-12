@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { reducer as reduxFormReducer } from 'redux-form';
 import { firebaseReducer } from 'react-redux-firebase'
 import visibilityFilter from './visibilityFilter'
 import notice from './notice'
@@ -8,5 +9,6 @@ export default combineReducers({
   firebase: firebaseReducer,
   notice,
   todoStatuses,
-  visibilityFilter
+  visibilityFilter,
+  form: reduxFormReducer,
 })

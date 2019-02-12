@@ -1,4 +1,5 @@
 import React from 'react'
+import { Field, reduxForm } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { compose, bindActionCreators } from 'redux'
@@ -6,7 +7,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router';
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
 import { addTodo } from '../actions/todoActions'
 
 
@@ -32,28 +32,30 @@ const styles = theme => ({
   }
 })
 class AddTodoForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+  }
+  submit(value) {
+    const { addTodo, history, match: { params: { uid } } } = this.props
+    if (!value.title.trim()) {
+      return;
+    }
+    addTodo(uid, value.title)
+    history.push(`/users/${uid}/todos`);
+  }
   render() {
-    const { classes, match: { params: { uid } }, addTodo, history } = this.props;
+    const { classes, history, handleSubmit } = this.props;
     return (
       <div className={classes.todoListRoot}>
         <Paper className={classes.todoListContent}>
           <form
-            onSubmit={e => {
-              e.preventDefault()
-              if (!this.inputElement.value.trim()) {
-                return
-              }
-              addTodo(uid, this.inputElement.value)
-              this.inputElement.value = ''
-              history.push(`/users/${uid}/todos`);
-            }}
+            onSubmit={handleSubmit(this.submit)}
           >
-            <TextField
-              inputRef={node => {
-                this.inputElement = node
-              }}
-              style={styles.textField}
-              label='Title'
+            <Field
+              name="title"
+              component="input"
+              type="text"
             />
             <div className={classes.button}>
               <Button variant="contained" color="secondary" type="submit">
@@ -83,4 +85,5 @@ export default
   compose(
     withStyles(styles),
     connect(null, mapDispatchToProps),
+    reduxForm({ form: "addForm" })
   )(withRouter(AddTodoForm));

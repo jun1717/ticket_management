@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import firebase from 'firebase'
 import { MuiThemeProvider } from '@material-ui/core/styles'
@@ -14,8 +14,13 @@ import firebaseConfig from './firebase/config'
 
 firebase.initializeApp(firebaseConfig);
 
+const logger = createLogger({
+  diff: true,
+  collapsed: true,
+})
+
 const createStoreWithFirebase = compose(
-  applyMiddleware(thunk.withExtraArgument({ getFirebase })),
+  applyMiddleware(thunk.withExtraArgument({ getFirebase }), logger),
   reactReduxFirebase(firebase, { userProfile: 'users', preserveOnLogout: ['todos', 'users', 'recentUpdatedTodos'] })
 )(createStore);
 
