@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router';
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 import { addTodo } from '../actions/todoActions'
 
 
@@ -31,6 +32,27 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
   }
 })
+
+const renderTextField = ({ input, label }) => (
+  <TextField
+    {...input}
+    label={label}
+  />
+);
+
+const renderTextArea = ({ input, label }) => (
+  <TextField
+    {...input}
+    label={label}
+    multiline
+    rows="3"
+    rowsMax="4"
+    margin="normal"
+    variant="outlined"
+    type="time"
+  />
+);
+
 class AddTodoForm extends React.Component {
   constructor(props) {
     super(props);
@@ -52,10 +74,19 @@ class AddTodoForm extends React.Component {
           <form
             onSubmit={handleSubmit(this.submit)}
           >
+            <div>
+              <Field
+                name="title"
+                label="Title"
+                component={renderTextField}
+                type="text"
+              />
+            </div>
             <Field
-              name="title"
-              component="input"
-              type="text"
+              name="text"
+              label="Text"
+              component={renderTextArea}
+              type="time"
             />
             <div className={classes.button}>
               <Button variant="contained" color="secondary" type="submit">
