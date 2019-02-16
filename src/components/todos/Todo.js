@@ -50,7 +50,7 @@ const StatusIcon = (todoStatus) => {
   return null
 }
 
-const Todo = ({ onClick, completed, text, isOwnTodos, todoStatus }) => (
+const Todo = ({ onClick, completed, title, isOwnTodos, todoStatus }) => (
   <ListItem
     onClick={onClick}
     button={isOwnTodos}
@@ -58,7 +58,7 @@ const Todo = ({ onClick, completed, text, isOwnTodos, todoStatus }) => (
     {CheckIcon(isOwnTodos, completed)}
     <ListItemText inset>
       <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>
-        {text}
+        {title}
       </span>
     </ListItemText>
     {StatusIcon(todoStatus)}
@@ -69,7 +69,7 @@ Todo.propTypes = {
   isOwnTodos: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   completed: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   todoStatus: PropTypes.shape({
     status: PropTypes.oneOf(['sending', 'success', 'error']).isRequired
   })

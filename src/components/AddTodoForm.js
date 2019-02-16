@@ -60,10 +60,11 @@ class AddTodoForm extends React.Component {
   }
   submit(value) {
     const { addTodo, history, match: { params: { uid } } } = this.props
+    const { title, text } = value;
     if (!value.title.trim()) {
       return;
     }
-    addTodo(uid, value.title)
+    addTodo(uid, title, text);
     history.push(`/users/${uid}/todos`);
   }
   render() {

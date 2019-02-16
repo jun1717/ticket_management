@@ -5,7 +5,10 @@
         ".read": true,
         ".write": "$uid === auth.uid",
         "$todoId": {
-          ".validate": "newData.hasChildren(['text', 'completed', '_createdAt', '_updatedAt'])",
+          ".validate": "newData.hasChildren(['title', 'text', 'completed', '_createdAt', '_updatedAt'])",
+          "title": {
+            ".validate": "newData.isString()"
+          },
           "text": {
             ".validate": "newData.isString()"
           },

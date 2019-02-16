@@ -42,19 +42,19 @@ const notAuthenticatedOnTodoAction = () => ({
 })
 
 
-export const addTodo = (uid, text) => {
+export const addTodo = (uid, title, text) => {
   return (dispatch, getState, { getFirebase }) => {
     if (!uid) {
       dispatch(notAuthenticatedOnTodoAction());
       return;
     }
-    dispatch(addTodoRequest());
     const firebase = getFirebase();
     const id = firebase.push(`todos/${uid}`).key;
     dispatch(addTodoRequest(id));
     const createdAt = moment().valueOf();
     firebase.set(`todos/${uid}/${id}`, {
       completed: false,
+      title,
       text,
       _createdAt: createdAt,
       _updatedAt: createdAt
@@ -67,7 +67,7 @@ export const addTodo = (uid, text) => {
   }
 }
 
-export const toggleTodo = (uid, id) => {  // #4
+export const toggleTodo = (uid, id) => {
   return (dispatch, getState, { getFirebase }) => {
     if (!uid) {
       dispatch(notAuthenticatedOnTodoAction());
