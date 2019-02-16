@@ -25,24 +25,26 @@ const styles = theme => ({
   todoForm: {
     padding: theme.spacing.unit * 4,
   },
-  textField: {
-    width: 600,
+  field: {
+    width: '100%',
   },
   button: {
     paddingTop: theme.spacing.unit * 2,
   }
 })
 
-const renderTextField = ({ input, label }) => (
+const renderTextField = ({ input, label, ...others }) => (
   <TextField
     {...input}
     label={label}
+    {...others}
   />
 );
 
-const renderTextArea = ({ input, label }) => (
+const renderTextArea = ({ input, label, ...others }) => (
   <TextField
     {...input}
+    {...others}
     label={label}
     multiline
     rows="3"
@@ -81,6 +83,7 @@ class AddTodoForm extends React.Component {
                 label="Title"
                 component={renderTextField}
                 type="text"
+                className={classes.field}
               />
             </div>
             <Field
@@ -88,6 +91,7 @@ class AddTodoForm extends React.Component {
               label="Text"
               component={renderTextArea}
               type="time"
+              className={classes.field}
             />
             <div className={classes.button}>
               <Button variant="contained" color="secondary" type="submit">
