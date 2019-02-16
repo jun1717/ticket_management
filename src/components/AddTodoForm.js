@@ -30,6 +30,8 @@ const styles = theme => ({
   },
   button: {
     paddingTop: theme.spacing.unit * 2,
+    width: '130px',
+    marginLeft: 'auto',
   }
 })
 
@@ -97,9 +99,9 @@ class AddTodoForm extends React.Component {
               <Button variant="contained" color="secondary" type="submit">
                 追加
               </Button>
+              <Button ariant="contained" color="secondary" onClick={() => history.goBack()}>戻る</Button>
             </div>
           </form>
-          <Button ariant="contained" color="secondary" onClick={() => history.goBack()}>戻る</Button>
         </Paper>
       </div >
     )
